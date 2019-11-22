@@ -1,0 +1,51 @@
+* {
+  box-sizing: border-box;
+}
+
+a {
+  text-decoration: none;
+  color: black;
+}
+
+button {
+  background: none;
+  border: 1px solid black;
+  padding: 10px 20px;
+}
+
+ul {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+
+.bold {
+  font-weight: bold;
+}
+
+.App {
+  margin: 50px;
+}
+
+.App_sections {
+  display: flex;
+}
+
+.App_FolderList {
+  flex: 1;
+  text-align: center;
+  margin: 0;
+  padding: 0;
+}
+
+.App_NotesList {
+  flex: 3;
+  margin: 0;
+  padding: 0;
+}
+
+@media (max-width: 600px) {
+  .App_sections {
+    flex-direction: column;
+  }
+}
