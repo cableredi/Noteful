@@ -3,20 +3,19 @@ import { NavLink } from 'react-router-dom';
 
 export default function FolderList(props) {
   const folderItems = props.folders.map( (folder) => 
-    <NavLink
-      className='Folderlist_selected'
-      key={folder.id}
-      to={`/folder/${folder.id}`}
-    >
-      <li>
-          {folder.name}
-      </li>
-    </NavLink>
+    <li key={folder.id}>
+      <NavLink
+        className='Folderlist'
+        to={`/folder/${folder.id}`}
+      >
+        {folder.name}
+      </NavLink>
+    </li>
   )
 
   return(
     <>
-      <ul className='FolderList'>
+      <ul>
         {folderItems}
       </ul>
       <button className='FolderButton'>Add Folder</button>

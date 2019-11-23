@@ -1,10 +1,3 @@
-.FolderList li {
-  text-align: center;
-  padding: 20px 30px;
-  border: 1px solid black;
-  margin: 3px;
-}
-
 .FolderButton {
   margin-top: 20px;
 }
@@ -13,10 +6,19 @@
   background-color: orange;
 }
 
-.Folderlist_selected li:hover {
+.Folderlist {
+  display: block;
+  text-align: center;
+  padding: 20px 30px;
+  border: 1px solid black;
+  margin: 3px;
+}
+
+.Folderlist:hover {
   background-color: yellow;
 }
 
-.FolderActive {
+
+.Folderlist.active {
   background-color: pink;
 }
