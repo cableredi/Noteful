@@ -56,8 +56,32 @@ ul {
   background-color: $noteMainBackground;
 }
 
-@media (max-width: 600px) {
+@media (max-width: 540px) {
   .App_sections {
     flex-direction: column;
+  }
+
+  .App_NotesList {
+    margin-top: 20px;
+  }
+}
+
+@media (min-width: 541px) {
+  .App_sections {
+    flex-direction: column;
+  }
+
+  .App_NotesList {
+    margin-top: 20px;
+  }
+}
+
+@media (min-width: 600px) {
+  .App_sections {
+    flex-direction: row;
+  }
+
+  .App_NotesList {
+    margin-top: 0px;
   }
 }

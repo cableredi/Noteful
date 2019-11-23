@@ -30,3 +30,11 @@
   display: block;
   margin: 20px auto;
 }
+
+@media (max-width: 540px) {
+  .NotesList button {
+    float: none;
+    display: block;
+    margin-top: 20px;
+  }
+}

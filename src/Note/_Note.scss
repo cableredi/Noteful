@@ -17,3 +17,11 @@
 .Note_content {
   margin: 30px;
 }
+
+@media (max-width: 540px) {
+  .Note button {
+    float: none;
+    display: block;
+    margin-top: 20px;
+  }
+}
