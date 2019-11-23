@@ -4,8 +4,12 @@
 
 .NotesList li {
   padding: 20px;
-  border: 1px solid black;
-  margin: 3px;
+  margin: 20px;
+  background-color: $noteBackground;
+}
+
+.NotesList li a {
+  color: $noteColor;
 }
 
 .NotesList .noteName {
@@ -13,7 +17,16 @@
   margin-bottom: 10px;
 }
 
+.NotesList .noteName:hover {
+  color: $noteHover;
+}
+
 .NotesList button {
   float: right;
   margin-top: -10px;
+}
+
+.NoteButton {
+  display: block;
+  margin: 20px auto;
 }

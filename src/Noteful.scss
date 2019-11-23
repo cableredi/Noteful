@@ -1,5 +1,8 @@
-@import './_index.scss';
-@import './_App.scss';
-@import './Header/_Header.scss';
-@import './FolderList/_Folderlist';
-@import './NotesList/_NotesList';
+@import 'variables';
+@import './index';
+@import './App';
+@import './Header/Header';
+@import './FolderList/Folderlist';
+@import './NotesList/NotesList';
+@import './Note/Note';
+@import './FolderNote/FolderNote';

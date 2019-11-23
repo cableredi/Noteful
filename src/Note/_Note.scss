@@ -1,0 +1,19 @@
+.Note {
+  margin: 20px;
+  background-color: $noteBackground;
+  padding: 10px;
+}
+
+.Note_noteName {
+  font-size: 1.3em;
+  margin-bottom: 10px;
+}
+
+.Note button {
+  float: right;
+  margin-top: -10px;
+}
+
+.Note_content {
+  margin: 30px;
+}

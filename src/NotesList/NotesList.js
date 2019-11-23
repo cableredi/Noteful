@@ -1,7 +1,13 @@
 import React from 'react';
 import { NavLink } from 'react-router-dom';
 
+function convertDate(date) {
+  let d = new Date(date);
+  return d.toDateString();
+}
+
 export default function NotesList(props) {
+
   const notesItems = props.notes.map( (note) => 
     <li key={note.id}>
       <NavLink
@@ -10,8 +16,8 @@ export default function NotesList(props) {
       >
         <div className='bold noteName'>{note.name}</div>
       </NavLink>
-      <div className='NotesList_info'>
-        <span className='bold noteModified'>Date modified: </span> {note.modified}
+      <div>
+        <span className='bold noteModified'>Date modified: </span> { convertDate(note.modified) }
         <button type='button'>Delete Note</button>
       </div>
     </li>

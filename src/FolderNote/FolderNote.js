@@ -6,7 +6,7 @@ export default function FolderNote(props) {
       <button type='button' className='FolderNote_GoBack' onClick={ props.history.goBack }>
         Go Back
       </button>
-      <div>{props.folder[0].name}</div>
+      <div className='Foldernote_folder'>{props.folder[0].name}</div>
     </>
   )
 }

@@ -2,23 +2,22 @@
   margin-top: 20px;
 }
 
-.FolderButton:hover {
-  background-color: orange;
-}
-
 .Folderlist {
   display: block;
   text-align: center;
   padding: 20px 30px;
-  border: 1px solid black;
-  margin: 3px;
+  margin: 0 0 5px 5px;
+  background-color: $folderBackground;
+  color: $folderColor;
+  font-weight: bold;
 }
 
 .Folderlist:hover {
-  background-color: yellow;
+  background-color: $folderHoverBackground;
+  color: $folderHover;
 }
 
 
 .Folderlist.active {
-  background-color: pink;
+  background-color: $folderSelected;
 }
