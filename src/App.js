@@ -5,7 +5,7 @@ import Header from './Header/Header';
 import FolderList from './FolderList/FolderList';
 import NotesList from './NotesList/NotesList';
 import FolderNote from './FolderNote/FolderNote';
-import Note from './Note/Note';
+import NoteNote from './NoteNote/NoteNote';
 
 class App extends Component {
   state = {
@@ -83,7 +83,7 @@ class App extends Component {
             <Route
               exact path = '/note/:noteId'
               render={ (routeProps) =>
-                <Note 
+                <NoteNote 
                   notes={this.state.notes.filter(note => note.id === routeProps.match.params.noteId)} 
                 />
               }
