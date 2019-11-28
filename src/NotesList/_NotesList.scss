@@ -12,15 +12,6 @@
   color: $noteColor;
 }
 
-.NotesList .noteName {
-  font-size: 1.3em;
-  margin-bottom: 10px;
-}
-
-.NotesList .noteName:hover {
-  color: $noteHover;
-}
-
 .NotesList button {
   float: right;
   margin-top: -10px;

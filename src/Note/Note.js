@@ -1,27 +1,16 @@
 import React from 'react';
-import { NavLink } from 'react-router-dom';
+import NoteSummary from '../NoteSummary/NoteSummary'
 
-function convertDate(date) {
-  let d = new Date(date);
-  return d.toDateString();
-}
 
-export default function NoteNote(props) {
+export default function Note(props) {
   return(
-    <div className='Note'>
-      <NavLink
-        className='Note_selected'
-        to={`/note/${props.id}`}
-      >
-        <div className='bold noteName'>{props.name}</div>
-      </NavLink>
-      <div>
-        <span className='bold noteModified'>Date modified: </span> { convertDate(props.modified) }
-        <button type='button'>Delete Note</button>
-      </div>
+    <div className='Note_note'>
+      <NoteSummary
+        id={props.notes.id}
+        name={props.notes.name}
+        modified={props.notes.modified}
+      />
+      <div className='Note_content'>{props.notes.content}</div>
     </div>
   )
 }
-
-
-

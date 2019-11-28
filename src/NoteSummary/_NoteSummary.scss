@@ -9,6 +9,10 @@
   margin-bottom: 10px;
 }
 
+.Note_noteName:hover {
+  color: $noteHover;
+}
+
 .Note button {
   float: right;
   margin-top: -10px;
@@ -20,9 +24,8 @@
   background-color: $noteBackground;
 }
 
-.Note_note {
-  background-color: $noteBackground;
-  margin: 0 20px;
+.Note_noteMotified {
+  font-size: 16px;;
 }
 
 @media (max-width: 540px) {
