@@ -9,9 +9,11 @@ function convertDate(date) {
 
 NoteSummary.defaultProps ={
   onDeleteNote: () => {},
+  onNote: false
 }
 
 export default function NoteSummary(props) {
+console.log(props)
   return(
     <div className='Note'>
       <NavLink

@@ -27,17 +27,15 @@ class App extends Component {
   }
 
   handleDeleteNote = (noteId) => {
-console.log('kim handle delete note')
     const newNotes = this.state.notes.filter(note =>
       note.id !== noteId
-    )
+    );
     this.setState({
       notes: newNotes
-    })
+    });
   }
 
-  deleteNoteRequest(noteId) {
-console.log('kim delete request')
+  deleteNoteRequest(noteId, onNote) {
     fetch(config.API_ENDPOINT_NOTES + `/${noteId}`, {
       method: 'DELETE',
       headers: {
@@ -50,18 +48,15 @@ console.log('kim delete request')
             throw error
           })
         }
-        return response.json()
+        this.handleDeleteNote(noteId, onNote)
       })
-      .then(
-        this.handleDeleteNote
-      )
       .catch(error => {
         console.error(error)
       })
   }
 
-  getFolder(NotesId) {
-    const gotNote =  this.state.notes.find(note => note.id === NotesId);
+  getFolder(notesId) {
+    const gotNote =  this.state.notes.find(note => note.id === notesId);
     return this.state.folders.find(folder => folder.id === gotNote.folderId);
   } 
 
@@ -97,11 +92,12 @@ console.log('kim delete request')
         .catch(error => this.setState({error}))
   }
 
+
   render() {
     const contextValue = {
       folders: this.state.folders,
       notes: this.state.notes,
-      deleteNote: this.deleteNoteRequest
+      deleteNote: this.deleteNoteRequest.bind(this)
     }
 
     return (
@@ -156,7 +152,7 @@ console.log('kim delete request')
                 exact path = '/folder/:folderId'
                 render={ (routeProps) =>
                   <NotesList 
-                    notes={this.state.notes.find(note => note.folderId === routeProps.match.params.folderId)} 
+                    notes={this.state.notes.filter(note => note.folderId === routeProps.match.params.folderId)} 
                   />
                 }
               />
@@ -166,7 +162,7 @@ console.log('kim delete request')
                 exact path = '/note/:noteId'
                 render={ (routeProps) =>
                   <Note 
-                    notes={this.state.notes.find(note => note.id === routeProps.match.params.noteId)} 
+                    notes={this.state.notes.find(note => note.id === routeProps.match.params.noteId)}
                   />
                 }
               />
