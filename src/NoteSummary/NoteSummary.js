@@ -9,7 +9,7 @@ function convertDate(date) {
 }
 
 NoteSummary.defaultProps = {
-  onDeleteNote: () => {}
+  deleteNote: () => {}
 }
 
 function deleteNoteRequest(props, callback) {
@@ -26,7 +26,7 @@ function deleteNoteRequest(props, callback) {
         })
       }
       callback(props.id)
-      props.onDeleteNote()
+      props.deleteNote()
     })
     .catch(error => {
       console.error(error)
