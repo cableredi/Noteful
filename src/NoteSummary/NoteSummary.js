@@ -1,5 +1,5 @@
 import React from 'react';
-import { NavLink, withRouter } from 'react-router-dom';
+import { NavLink, withRouter, useHistory } from 'react-router-dom';
 import NotefulContext from '../NotefulContext';
 import config from '../config';
 
@@ -12,7 +12,7 @@ NoteSummary.defaultProps = {
   deleteNote: () => {}
 }
 
-function deleteNoteRequest(props, callback) {
+function deleteNoteRequest(props, callback, history) {
   fetch(config.API_ENDPOINT_NOTES + `/${props.id}`, {
     method: 'DELETE',
     headers: {
@@ -25,8 +25,8 @@ function deleteNoteRequest(props, callback) {
           throw error
         })
       }
+      history.push('/');
       callback(props.id)
-      props.deleteNote()
     })
     .catch(error => {
       console.error(error)
@@ -34,6 +34,8 @@ function deleteNoteRequest(props, callback) {
 }
 
 function NoteSummary(props) {
+  let history = useHistory();
+
   return(
     <div className='Note'>
       <NavLink
@@ -49,7 +51,7 @@ function NoteSummary(props) {
             <button 
               type='button'
               onClick={ () => {
-                deleteNoteRequest(props, context.onDeleteNote)
+                deleteNoteRequest(props, context.onDeleteNote, history)
               }}
             >
               Delete Note
