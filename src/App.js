@@ -27,32 +27,14 @@ class App extends Component {
   }
 
   handleDeleteNote = (noteId) => {
+  console.log('App handleDeleteNote')
+  console.log(noteId)
     const newNotes = this.state.notes.filter(note =>
       note.id !== noteId
     );
     this.setState({
       notes: newNotes
     });
-  }
-
-  deleteNoteRequest(noteId, onNote) {
-    fetch(config.API_ENDPOINT_NOTES + `/${noteId}`, {
-      method: 'DELETE',
-      headers: {
-        'content-type': 'application/json'
-      }
-    })
-      .then(response => {
-        if (!response.ok) {
-          return response.json().then(error => {
-            throw error
-          })
-        }
-        this.handleDeleteNote(noteId, onNote)
-      })
-      .catch(error => {
-        console.error(error)
-      })
   }
 
   getFolder(notesId) {
@@ -97,7 +79,7 @@ class App extends Component {
     const contextValue = {
       folders: this.state.folders,
       notes: this.state.notes,
-      deleteNote: this.deleteNoteRequest.bind(this)
+      onDeleteNote: this.handleDeleteNote
     }
 
     return (

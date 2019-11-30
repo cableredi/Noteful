@@ -1,19 +1,39 @@
 import React from 'react';
-import { NavLink } from 'react-router-dom';
+import { NavLink, withRouter } from 'react-router-dom';
 import NotefulContext from '../NotefulContext';
+import config from '../config';
 
 function convertDate(date) {
   let d = new Date(date);
   return d.toDateString();
 }
 
-NoteSummary.defaultProps ={
-  onDeleteNote: () => {},
-  onNote: false
+NoteSummary.defaultProps = {
+  onDeleteNote: () => {}
 }
 
-export default function NoteSummary(props) {
-console.log(props)
+function deleteNoteRequest(props, callback) {
+  fetch(config.API_ENDPOINT_NOTES + `/${props.id}`, {
+    method: 'DELETE',
+    headers: {
+      'content-type': 'application/json'
+    }
+  })
+    .then(response => {
+      if (!response.ok) {
+        return response.json().then(error => {
+          throw error
+        })
+      }
+      callback(props.id)
+      props.onDeleteNote()
+    })
+    .catch(error => {
+      console.error(error)
+    })
+}
+
+function NoteSummary(props) {
   return(
     <div className='Note'>
       <NavLink
@@ -29,7 +49,7 @@ console.log(props)
             <button 
               type='button'
               onClick={ () => {
-                context.deleteNote(props.id)
+                deleteNoteRequest(props, context.onDeleteNote)
               }}
             >
               Delete Note
@@ -41,4 +61,4 @@ console.log(props)
   )
 }
 
-
+export default withRouter(NoteSummary);
