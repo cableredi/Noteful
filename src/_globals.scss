@@ -1,0 +1,47 @@
+a {
+  text-decoration: none;
+  color: $noteColor;
+}
+
+button {
+  background: $buttonBackground;
+  border: 0;
+  border-radius: 5px;
+  padding: 10px 20px;
+  color: $buttonColor;
+  box-shadow: 0 0 5px grey;
+}
+
+button:hover,
+button:focus {
+  background-color: $buttonHover;
+  box-shadow: 0 0 5px $buttonHover;
+  color: $buttonColor;
+}
+
+ul {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+
+.bold {
+  font-weight: bold;
+}
+
+.Add_button {
+  margin: 20px auto;
+  background-color: $folderBackground;
+  width: 150px;
+  padding: 10px 15px;
+  border-radius: 5px;
+  box-shadow: 0 0 5px lightgray;
+  text-align: center;
+}
+
+.Add_button:hover,
+.Add_button:focus {
+  background-color: $buttonHover;
+  box-shadow: 0 0 5px $buttonHover;
+  font-weight: bold;
+}

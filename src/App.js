@@ -6,6 +6,10 @@ import FolderList from './FolderList/FolderList';
 import NotesList from './NotesList/NotesList';
 import FolderNote from './FolderNote/FolderNote';
 import Note from './Note/Note';
+import FolderAdd from './AddForms/FolderAdd';
+import FolderAddForm from './AddForms/FolderAddForm';
+import NoteAddForm from './AddForms/NoteAddForm';
+import ErrorBoundary from './ErrorBoundary';
 import config from './config';
 
 class App extends Component {
@@ -26,9 +30,19 @@ class App extends Component {
     })
   }
 
+  addFolder = folder => {
+    this.setState({
+      folders: [ ...this.state.folders, folder ],
+    })
+  }
+
+  addNote = note => {
+    this.setState({
+      notes: [ ...this.state.notes, note ],
+    })
+  }
+
   handleDeleteNote = (noteId) => {
-  console.log('App handleDeleteNote')
-  console.log(noteId)
     const newNotes = this.state.notes.filter(note =>
       note.id !== noteId
     );
@@ -79,7 +93,9 @@ class App extends Component {
     const contextValue = {
       folders: this.state.folders,
       notes: this.state.notes,
-      onDeleteNote: this.handleDeleteNote
+      onDeleteNote: this.handleDeleteNote,
+      addFolder: this.addFolder,
+      addNote: this.addNote,
     }
 
     return (
@@ -91,65 +107,77 @@ class App extends Component {
 
         <NotefulContext.Provider value={contextValue}>
           <div className='App_sections'>
-            { /* sidebar section */ }
-            <section className='App_FolderList'>
+              { /* All Folders/Notes list */ }
+              <ErrorBoundary>
+                <Route
+                  exact path = '/'
+                  render={ () =>
+                    <>
+                      <FolderList folders={this.state.folders} />
+                      <NotesList notes={this.state.notes} />
+                    </>
+                  }
+                />
+              </ErrorBoundary>
 
-              { /* Main Folder list */ }
-              <Route
-                exact path = '/'
-                component={FolderList}
-              />
+              { /* Selected Folder/All Notes for Folder list */ }
+              <ErrorBoundary>
+                <Route
+                  exact path = '/folder/:folderId'
+                  render={ (routeProps) =>
+                    <>
+                      <FolderList folders={this.state.folders} />
+                      <NotesList 
+                        notes={this.state.notes.filter(note => note.folderId === routeProps.match.params.folderId)} 
+                      />
+                    </>
+                  }
+                />
+              </ErrorBoundary>
 
-              { /* Selected Folder list */ }
-              <Route
-                exact path = '/folder/:folderId'
-                component={FolderList}
-              />
+              { /* Selected Folder/Note list */}
+              <ErrorBoundary>
+                <Route
+                  exact path = '/note/:NoteId'
+                  render = { (routeProps) =>
+                    <>
+                      <FolderNote 
+                        folder={ this.getFolder(routeProps.match.params.NoteId) } 
+                        {...routeProps}
+                      />
+                      <Note 
+                        notes={this.state.notes.find(note => note.id === routeProps.match.params.NoteId)}
+                      />
+                    </>
+                  }
+                />
+              </ErrorBoundary>
 
-              { /* Selected Note */}
-              <Route
-                exact path = '/note/:NoteId'
-                render = { (routeProps) => 
-                  <FolderNote 
-                    folder={ this.getFolder(routeProps.match.params.NoteId) } 
-                    {...routeProps}
-                  />
-                }
-              />
-            </section>
-
-            { /* main section */ }
-            <section className='App_NotesList'>
-
-              { /* All Notes list */ }
-              <Route
-                exact path = '/'
-                render={ () =>
-                  <NotesList notes={this.state.notes} />
-                }
-              />
-
-              { /* Selected Folder Notes list */ }
-              <Route
-                exact path = '/folder/:folderId'
-                render={ (routeProps) =>
-                  <NotesList 
-                    notes={this.state.notes.filter(note => note.folderId === routeProps.match.params.folderId)} 
-                  />
-                }
-              />
-
-              { /* Selected Note */ }
-              <Route
-                exact path = '/note/:noteId'
-                render={ (routeProps) =>
-                  <Note 
-                    notes={this.state.notes.find(note => note.id === routeProps.match.params.noteId)}
-                  />
-                }
-              />
-            </section>
-
+              { /* Add new Folder */ }
+              <ErrorBoundary>
+                <Route 
+                  path='/addFolder'
+                  render = { (routeProps) =>
+                    <>
+                      <FolderAdd {...routeProps} folder={this.state.folders} />
+                      <FolderAddForm />
+                    </>
+                  }
+                />
+              </ErrorBoundary>
+              
+              { /* Add new Note */ }
+              <ErrorBoundary>
+                <Route 
+                  path='/addNote'
+                  render = { (routeProps) =>
+                    <>
+                      <FolderAdd {...routeProps} folder={this.state.folders} />
+                      <NoteAddForm />
+                    </>
+                  }
+                />
+              </ErrorBoundary>
           </div>
         </NotefulContext.Provider>
       </div>

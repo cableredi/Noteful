@@ -6,34 +6,6 @@ html {
   background-color: $background;
 }
 
-a {
-  text-decoration: none;
-  color: $noteColor;
-}
-
-button {
-  background: $buttonBackground;
-  border: 0;
-  border-radius: 5px;
-  padding: 10px 20px;
-  color: $buttonColor
-}
-
-button:hover {
-  background-color: $buttonHover;
-  color: $buttonColor;
-}
-
-ul {
-  list-style: none;
-  padding: 0;
-  margin: 0;
-}
-
-.bold {
-  font-weight: bold;
-}
-
 .App {
   margin: 50px;
 }

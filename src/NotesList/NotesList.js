@@ -1,5 +1,8 @@
 import React from 'react';
+import { Link } from 'react-router-dom';
+import PropTypes from 'prop-types';
 import NoteSummary from '../NoteSummary/NoteSummary'
+import AddButton from '../AddForms/AddButton';
 
 export default function NotesList(props) {
 
@@ -14,11 +17,29 @@ export default function NotesList(props) {
 
 
   return(
-    <>
+    <section className='App_NotesList'>
       <ul className='NotesList'>
         {notesItems}
       </ul>
-      <button type='button' className='NoteButton'>Add Note</button>
-    </>
+
+      <div className='Add_button'>
+          <AddButton
+            tag={Link}
+            to='../addNote'
+            type='button' 
+            className='Add_button-button'
+          >
+            Add Note
+          </AddButton>
+        </div>
+    </section>
   )
 }
+
+NotesList.defaultProps = {
+  notes: []
+}
+
+NotesList.propTypes = {
+  notes: PropTypes.arrayOf(PropTypes.object)
+};

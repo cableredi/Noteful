@@ -1,4 +1,5 @@
-@import 'variables';
+@import './variables';
+@import './globals';
 @import './index';
 @import './App';
 @import './Header/Header';
@@ -7,3 +8,5 @@
 @import './Note/Note';
 @import './NoteSummary/NoteSummary';
 @import './FolderNote/FolderNote';
+@import './AddForms/AddForms';
+@import './ValidateError/ValidateError';
