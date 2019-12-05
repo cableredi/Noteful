@@ -18,6 +18,7 @@ class App extends Component {
     notes: []
   }
 
+  /* Update state */
   setFolders = folders => {
     this.setState({
       folders
@@ -42,6 +43,7 @@ class App extends Component {
     })
   }
 
+  /* Delete note */
   handleDeleteNote = (noteId) => {
     const newNotes = this.state.notes.filter(note =>
       note.id !== noteId
@@ -51,11 +53,13 @@ class App extends Component {
     });
   }
 
+  /* get folder from noteId */
   getFolder(notesId) {
     const gotNote =  this.state.notes.find(note => note.id === notesId);
     return this.state.folders.find(folder => folder.id === gotNote.folderId);
   } 
 
+  /* fetch API => read */
   componentDidMount() {
     fetch(config.API_ENDPOINT_FOLDERS, {
       method: 'GET',
