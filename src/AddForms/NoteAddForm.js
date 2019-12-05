@@ -23,6 +23,9 @@ class NoteAddForm extends Component {
         value: '',
         touched: false
       },
+      noteAddButton: {
+        value: false,
+      }
     }
   }
 
@@ -50,6 +53,14 @@ class NoteAddForm extends Component {
       noteContent: {
         value: noteContent,
         touched: true
+      }
+    })
+  }
+
+  updateNoteAddButton(noteAddButton) {
+    this.setState({
+      noteAddButton: {
+        value: noteAddButton
       }
     })
   }
@@ -94,19 +105,13 @@ class NoteAddForm extends Component {
     } else if (name.match(/[^a-zA-Z0-9 ]/)) {
       return 'Note Name can only include Alphanumeric letters'
     } else if (this.state.noteFolder.value > '') {
-      return this.validateNoteInFolder();
-    }
-  }
+      const noteName = this.state.noteName.value.trim();
+      const folderId = this.state.noteFolder.value.trim();
+      const notes = this.context.notes.filter(note => note.folderId === folderId)
 
-  /* Validate Note name not already in Folder */
-  validateNoteInFolder() {
-    const noteName = this.state.noteName.value.trim();
-    const folderId = this.state.noteFolder.value.trim();
-
-    const notes = this.context.notes.filter(note => note.folderId === folderId)
-
-    if ( notes.find(note => note.name === noteName) ) {
-      return 'Note Name already exists in the folder';
+      if ( notes.find(note => note.name === noteName) ) {
+        return 'Note Name already exists in the folder';
+      }
     }
   }
 
@@ -114,16 +119,16 @@ class NoteAddForm extends Component {
   validateNoteFolder() {
     const folder = this.state.noteFolder.value.trim();
 
-    if (folder.value === null) {
+    if (folder.value === 'Folder ...') {
       return 'Folder is required';
-    }    
+    }
   }
 
   /* Validate Note Content */
   validateNoteContent() {
-    const name = this.state.noteName.value.trim();
+    const content = this.state.noteContent.value.trim();
 
-    if (name.length === 0) {
+    if (content.length === 0) {
       return 'Note Content is required';
     }
   }
@@ -133,8 +138,8 @@ class NoteAddForm extends Component {
     const NoteFolderError = this.validateNoteFolder();
     const NoteContentError = this.validateNoteContent();
 
-    if (NoteNameError == null && NoteFolderError == null && NoteContentError == null) {
-      document.getElementById('AddNoteButton').disabled = false;
+    if (typeof NoteNameError === 'undefined' && typeof NoteFolderError === 'undefined' && typeof NoteContentError === 'undefined') {
+      this.updateNoteAddButton(true);
     }
 
     const folderOptions = this.context.folders.map( (folder, i) => 
@@ -158,7 +163,7 @@ class NoteAddForm extends Component {
 							aria-required="true"
               onChange={e => this.updateNoteFolder(e.target.value)}
             >
-              <option value=''>Please select a Folder... </option>
+              <option value=''>Folder... </option>
               {folderOptions}
             </select>
           </div>
@@ -182,8 +187,6 @@ class NoteAddForm extends Component {
           <div>
             <label htmlFor='noteContent'>Note Content: </label>
             <textarea
-              rows='4'
-              cols='80'
               className='formTextArea'
               name='noteContent'
               id='noteContent'
@@ -201,7 +204,7 @@ class NoteAddForm extends Component {
               type='submit'
               className='formButtons'
               id='AddNoteButton'
-              disabled
+              disabled={this.state.noteAddButton.value ? '' : 'disabled'}
             >
               Add
             </button>

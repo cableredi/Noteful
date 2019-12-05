@@ -13,11 +13,6 @@
   color: $noteHover;
 }
 
-.Note button {
-  float: right;
-  margin-top: -10px;
-}
-
 .Note_content {
   margin: 30px;
   padding: 0 10px 20px 10px;
@@ -33,5 +28,24 @@
     float: none;
     display: block;
     margin-top: 20px;
+  }
+
+  .Note_noteModified {
+    display: block;
+  }
+}
+
+@media (min-width: 541px) {
+  .Note button {
+    float: none;
+    display: block;
+    margin-top: 20px;
+  }
+}
+
+@media (min-width: 700px) {
+  .Note button {
+    float: right;
+    margin-top: -10px;
   }
 }

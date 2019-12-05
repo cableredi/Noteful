@@ -15,7 +15,7 @@ import config from './config';
 class App extends Component {
   state = {
     folders: [],
-    notes: [],
+    notes: []
   }
 
   setFolders = folders => {

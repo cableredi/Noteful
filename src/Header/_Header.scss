@@ -12,7 +12,8 @@
   color: $headerColor;
 }
 
-.header_icon {
-  color: $buttonHover;
+@media (max-width: 540px) {
+  .Header {
+    padding-left: 0;
+  }
 }
-

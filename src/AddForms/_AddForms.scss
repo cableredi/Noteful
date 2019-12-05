@@ -61,5 +61,30 @@ label {
 }
 
 .formTextArea {
-  vertical-align: top;
+	vertical-align: top;
+	width: 80%;
+	height: 80px;
+	min-height: 50px;
+}
+
+@media (max-width: 540px) {
+  form h2 {
+    font-size: 1.2em;
+	}
+	
+	label {
+		margin-left: 0;
+	}
+
+	input {
+		width: 100%;
+	}
+
+	select {
+		width: 100%;
+	}
+
+	textarea {
+		width: 100%;
+	}
 }

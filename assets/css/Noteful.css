@@ -27,6 +27,10 @@ ul {
   margin: 0;
 }
 
+h2 {
+  color: blueviolet;
+}
+
 .bold {
   font-weight: bold;
 }
@@ -146,11 +150,13 @@ html {
 }
 
 .Header h1 a {
-  color: black;
+  color: blueviolet;
 }
 
-.header_icon {
-  color: blueviolet;
+@media (max-width: 540px) {
+  .Header {
+    padding-left: 0;
+  }
 }
 
 .Folderlist {
@@ -224,11 +230,6 @@ html {
   color: blueviolet;
 }
 
-.Note button {
-  float: right;
-  margin-top: -10px;
-}
-
 .Note_content {
   margin: 30px;
   padding: 0 10px 20px 10px;
@@ -244,6 +245,24 @@ html {
     float: none;
     display: block;
     margin-top: 20px;
+  }
+  .Note_noteModified {
+    display: block;
+  }
+}
+
+@media (min-width: 541px) {
+  .Note button {
+    float: none;
+    display: block;
+    margin-top: 20px;
+  }
+}
+
+@media (min-width: 700px) {
+  .Note button {
+    float: right;
+    margin-top: -10px;
   }
 }
 
@@ -325,6 +344,27 @@ label {
 
 .formTextArea {
   vertical-align: top;
+  width: 80%;
+  height: 80px;
+  min-height: 50px;
+}
+
+@media (max-width: 540px) {
+  form h2 {
+    font-size: 1.2em;
+  }
+  label {
+    margin-left: 0;
+  }
+  input {
+    width: 100%;
+  }
+  select {
+    width: 100%;
+  }
+  textarea {
+    width: 100%;
+  }
 }
 
 .error {

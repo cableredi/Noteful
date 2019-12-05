@@ -75,7 +75,7 @@ class FolderAddForm extends Component {
 
     return (
       <section className='App_NotesList'>
-        <form className = 'AddForm' id = 'AddForm' onSubmit={e => this.handleSubmit(e)}>
+        <form className='AddForm' id='AddForm' onSubmit={e => this.handleSubmit(e)}>
           <h2>Add New Folder</h2>
           <label htmlFor='folderName'>Folder Name: </label>
           <input
