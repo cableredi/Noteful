@@ -22,9 +22,6 @@ class NoteAddForm extends Component {
       noteContent: {
         value: '',
         touched: false
-      },
-      noteAddButton: {
-        value: false,
       }
     }
   }
@@ -53,15 +50,6 @@ class NoteAddForm extends Component {
       noteContent: {
         value: noteContent,
         touched: true
-      }
-    })
-  }
-
-  updateNoteAddButton(noteAddButton) {
-console.log('updateNoteAddButton');
-    this.setState({
-      noteAddButton: {
-        value: noteAddButton
       }
     })
   }
@@ -122,9 +110,8 @@ console.log('updateNoteAddButton');
   /* Validate Note Folder */
   validateNoteFolder() {
     const folder = this.state.noteFolder.value;
-console.log('noteFolder value: ' + folder);
 
-    if (folder === null ) {
+    if (folder === '' ) {
       return {error: true, message:'Folder is required'};
     }
 
@@ -143,19 +130,14 @@ console.log('noteFolder value: ' + folder);
   }
 
   render() {
+    let noteButtonDisabled = true;
+
     const NoteNameError = this.validateNoteName();
     const NoteFolderError = this.validateNoteFolder();
     const NoteContentError = this.validateNoteContent();
-console.log('NoteNameError');
-console.log(NoteNameError);
-console.log('NoteFolderError');
-console.log(NoteFolderError);
-console.log('NoteContentError');
-console.log(NoteContentError);
 
-    if (NoteNameError.error && NoteFolderError.error && NoteContentError.error) {
-console.log('inside Error check');
-      this.updateNoteAddButton('');
+    if (!NoteNameError.error && !NoteFolderError.error && !NoteContentError.error) {
+      noteButtonDisabled = false;
     }
 
     const folderOptions = this.context.folders.map( (folder, i) => 
@@ -220,7 +202,7 @@ console.log('inside Error check');
               type='submit'
               className='formButtons'
               id='AddNoteButton'
-              disabled={!this.state.noteAddButton.value}
+              disabled={noteButtonDisabled}
             >
               Add
             </button>
