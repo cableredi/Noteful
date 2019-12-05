@@ -106,6 +106,7 @@ console.log('updateNoteAddButton');
     } else if (name.match(/[^a-zA-Z0-9 ]/)) {
       return  {error: true, message:'Note Name can only include Alphanumeric letters'};
     } else if (this.state.noteFolder.value > '') {
+
       const noteName = this.state.noteName.value.trim();
       const folderId = this.state.noteFolder.value.trim();
       const notes = this.context.notes.filter(note => note.folderId === folderId)
@@ -114,6 +115,8 @@ console.log('updateNoteAddButton');
         return  {error: true, message:'Note Name already exists in the folder'};
       }
     }
+
+    return  {error: false, message:''};
   }
 
   /* Validate Note Folder */
@@ -121,9 +124,11 @@ console.log('updateNoteAddButton');
     const folder = this.state.noteFolder.value;
 console.log('noteFolder value: ' + folder);
 
-    if (folder === 'Folder...' || folder === null ) {
+    if (folder === null ) {
       return {error: true, message:'Folder is required'};
     }
+
+    return  {error: false, message:''};
   }
 
   /* Validate Note Content */
@@ -133,14 +138,19 @@ console.log('noteFolder value: ' + folder);
     if (content.length === 0) {
       return  {error: true, message:'Note Content is required'};
     }
+
+    return  {error: false, message:''};
   }
 
   render() {
     const NoteNameError = this.validateNoteName();
     const NoteFolderError = this.validateNoteFolder();
     const NoteContentError = this.validateNoteContent();
+console.log('NoteNameError');
 console.log(NoteNameError);
+console.log('NoteFolderError');
 console.log(NoteFolderError);
+console.log('NoteContentError');
 console.log(NoteContentError);
 
     if (NoteNameError.error && NoteFolderError.error && NoteContentError.error) {
