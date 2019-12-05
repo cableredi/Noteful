@@ -58,6 +58,7 @@ class NoteAddForm extends Component {
   }
 
   updateNoteAddButton(noteAddButton) {
+console.log('updateNoteAddButton');
     this.setState({
       noteAddButton: {
         value: noteAddButton
@@ -99,28 +100,29 @@ class NoteAddForm extends Component {
     const name = this.state.noteName.value.trim();
 
     if (name.length === 0) {
-      return 'Note Name is required';
+      return {error: true, message:'Note Name is required'};
     } else if (name.length < 3) {
-      return 'Note Name must be at least 3 characters long';
+      return  {error: true, message:'Note Name must be at least 3 characters long'};
     } else if (name.match(/[^a-zA-Z0-9 ]/)) {
-      return 'Note Name can only include Alphanumeric letters'
+      return  {error: true, message:'Note Name can only include Alphanumeric letters'};
     } else if (this.state.noteFolder.value > '') {
       const noteName = this.state.noteName.value.trim();
       const folderId = this.state.noteFolder.value.trim();
       const notes = this.context.notes.filter(note => note.folderId === folderId)
 
       if ( notes.find(note => note.name === noteName) ) {
-        return 'Note Name already exists in the folder';
+        return  {error: true, message:'Note Name already exists in the folder'};
       }
     }
   }
 
   /* Validate Note Folder */
   validateNoteFolder() {
-    const folder = this.state.noteFolder.value.trim();
+    const folder = this.state.noteFolder.value;
+console.log('noteFolder value: ' + folder);
 
-    if (folder.value === 'Folder ...') {
-      return 'Folder is required';
+    if (folder === 'Folder...' || folder === null ) {
+      return {error: true, message:'Folder is required'};
     }
   }
 
@@ -129,7 +131,7 @@ class NoteAddForm extends Component {
     const content = this.state.noteContent.value.trim();
 
     if (content.length === 0) {
-      return 'Note Content is required';
+      return  {error: true, message:'Note Content is required'};
     }
   }
 
@@ -137,9 +139,13 @@ class NoteAddForm extends Component {
     const NoteNameError = this.validateNoteName();
     const NoteFolderError = this.validateNoteFolder();
     const NoteContentError = this.validateNoteContent();
+console.log(NoteNameError);
+console.log(NoteFolderError);
+console.log(NoteContentError);
 
-    if (typeof NoteNameError === 'undefined' && typeof NoteFolderError === 'undefined' && typeof NoteContentError === 'undefined') {
-      this.updateNoteAddButton(true);
+    if (NoteNameError.error && NoteFolderError.error && NoteContentError.error) {
+console.log('inside Error check');
+      this.updateNoteAddButton('');
     }
 
     const folderOptions = this.context.folders.map( (folder, i) => 
@@ -150,7 +156,7 @@ class NoteAddForm extends Component {
 
     return (
       <section className='App_NotesList'>
-        <form className = 'AddForm'  id = 'AddForm' onSubmit={e => this.handleSubmit(e)}>
+        <form className = 'AddForm'  id='AddForm' onSubmit={e => this.handleSubmit(e)}>
           <h2>Add New Note</h2>
           <div>
             <label htmlFor='noteFolder'>Folder: </label>
@@ -167,7 +173,7 @@ class NoteAddForm extends Component {
               {folderOptions}
             </select>
           </div>
-          {this.state.noteFolder.touched && <ValidateError message={NoteFolderError} />}
+          {this.state.noteFolder.touched && <ValidateError message={NoteFolderError.message} />}
 
           <div>
             <label htmlFor='noteName'>Note Name: </label>
@@ -182,7 +188,7 @@ class NoteAddForm extends Component {
               onChange={e => this.updateNoteName(e.target.value)}
             />
           </div>
-          {this.state.noteName.touched && <ValidateError message={NoteNameError} />}
+          {this.state.noteName.touched && <ValidateError message={NoteNameError.message} />}
 
           <div>
             <label htmlFor='noteContent'>Note Content: </label>
@@ -197,14 +203,14 @@ class NoteAddForm extends Component {
             >
             </textarea>
           </div>
-          {this.state.noteContent.touched && <ValidateError message={NoteContentError} />}
+          {this.state.noteContent.touched && <ValidateError message={NoteContentError.message} />}
 
           <div className='submitButtons'>
             <button
               type='submit'
               className='formButtons'
               id='AddNoteButton'
-              disabled={this.state.noteAddButton.value ? '' : 'disabled'}
+              disabled={!this.state.noteAddButton.value}
             >
               Add
             </button>
