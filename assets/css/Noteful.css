@@ -149,6 +149,10 @@ html {
   color: black;
 }
 
+.header_icon {
+  color: blueviolet;
+}
+
 .Folderlist {
   display: block;
   text-align: center;
@@ -304,7 +308,10 @@ label {
 
 .formSelect:focus,
 .formInput:focus,
-.formTextArea:focus {
+.formTextArea:focus,
+.formSelect:hover,
+.formInput:hover,
+.formTextArea:hover {
   border-color: #aaa;
   -webkit-box-shadow: 0 0 1px 3px blueviolet;
           box-shadow: 0 0 1px 3px blueviolet;

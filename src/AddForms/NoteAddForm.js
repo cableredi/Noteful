@@ -93,9 +93,21 @@ class NoteAddForm extends Component {
       return 'Note Name must be at least 3 characters long';
     } else if (name.match(/[^a-zA-Z0-9 ]/)) {
       return 'Note Name can only include Alphanumeric letters'
-    } /*else if ( this.context.notes.find(folder => folder.name.toLowerCase() === name.toLowerCase()) ) {
-      return name + ' already exists';
-    }*/
+    } else if (this.state.noteFolder.value > '') {
+      return this.validateNoteInFolder();
+    }
+  }
+
+  /* Validate Note name not already in Folder */
+  validateNoteInFolder() {
+    const noteName = this.state.noteName.value.trim();
+    const folderId = this.state.noteFolder.value.trim();
+
+    const notes = this.context.notes.filter(note => note.folderId === folderId)
+
+    if ( notes.find(note => note.name === noteName) ) {
+      return 'Note Name already exists in the folder';
+    }
   }
 
   /* Validate Note Folder */
@@ -146,7 +158,7 @@ class NoteAddForm extends Component {
 							aria-required="true"
               onChange={e => this.updateNoteFolder(e.target.value)}
             >
-              <option value=''>Please select a Folder...</option>
+              <option value=''>Please select a Folder... </option>
               {folderOptions}
             </select>
           </div>

@@ -46,7 +46,10 @@ label {
 
 .formSelect:focus,
 .formInput:focus,
-.formTextArea:focus {
+.formTextArea:focus,
+.formSelect:hover,
+.formInput:hover,
+.formTextArea:hover {
 	border-color: #aaa;
 	box-shadow: 0 0 1px 3px $buttonHover;
 	color: #222;

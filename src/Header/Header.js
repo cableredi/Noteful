@@ -8,7 +8,7 @@ export default function Header() {
     <header className='Header'>
       <h1>
         <Link to='/'>
-          Noteful <FontAwesomeIcon icon={faFolder} />
+          Noteful <span className='header_icon'><FontAwesomeIcon icon={faFolder} /></span>
         </Link>
       </h1>
     </header>
