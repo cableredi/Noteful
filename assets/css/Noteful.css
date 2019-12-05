@@ -182,16 +182,6 @@ html {
   clear: both;
 }
 
-.NotesList li {
-  padding: 20px;
-  margin: 20px;
-  background-color: #cccccc;
-}
-
-.NotesList li a {
-  color: black;
-}
-
 .NotesList button {
   float: right;
   margin-top: -10px;

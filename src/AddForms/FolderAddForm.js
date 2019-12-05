@@ -58,20 +58,26 @@ class FolderAddForm extends Component {
     const name = this.state.folderName.value.trim();
 
     if (name.length === 0) {
-      return 'Folder Name is required';
+      return {error: true, message:'Folder Name is required'};
     } else if (name.length < 3) {
-      return 'Folder Name must be at least 3 characters long';
+      return {error: true, message:'Folder Name must be at least 3 characters long'};
     } else if (name.match(/[^a-zA-Z0-9 ]/)) {
-      return 'Folder Name can only include Alphanumeric letters'
+      return {error: true, message:'Folder Name can only include Alphanumeric letters'};
     } else if ( this.context.folders.find(folder => folder.name.toLowerCase() === name.toLowerCase()) ) {
-      return name + ' already exists';
+      return {error: true, message:`${name} already exists`};
     }
 
-    document.getElementById('AddFolderButton').disabled = false;
+    return {error: false, message:''};
   }
 
   render() {
+    let noteButtonDisabled = true;
+
     const folderNameError = this.validateFolderName();
+
+    if (!folderNameError.error) {
+      noteButtonDisabled = false;
+    }
 
     return (
       <section className='App_NotesList'>
@@ -88,13 +94,13 @@ class FolderAddForm extends Component {
 						aria-required="true"
             onChange={e => this.updateFolderName(e.target.value)}
           />
-          {this.state.folderName.touched && <ValidateError message={folderNameError} />}
+          {this.state.folderName.touched && <ValidateError message={folderNameError.message} />}
           <div className='submitButtons'>
             <button
               type='submit'
               className='formButtons'
               id='AddFolderButton'
-              disabled
+              disabled={noteButtonDisabled}
             >
               Add
             </button>

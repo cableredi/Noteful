@@ -18,9 +18,9 @@ export default function NotesList(props) {
 
   return(
     <section className='App_NotesList'>
-      <ul className='NotesList'>
+      <div className='NotesList'>
         {notesItems}
-      </ul>
+      </div>
 
       <div className='Add_button'>
           <AddButton
