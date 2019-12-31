@@ -64,7 +64,7 @@ class NoteAddForm extends Component {
         'content-type': 'application/json'
       },
       body: JSON.stringify({
-        name: this.state.noteName.value,
+        noteName: this.state.noteName.value,
         folderId:  this.state.noteFolder.value,
         content: this.state.noteContent.value,
         modified: new Date(),
@@ -99,7 +99,7 @@ class NoteAddForm extends Component {
       const folderId = this.state.noteFolder.value.trim();
       const notes = this.context.notes.filter(note => note.folderId === folderId)
 
-      if ( notes.find(note => note.name === noteName) ) {
+      if ( notes.find(note => note.noteName === noteName) ) {
         return  {error: true, message:'Note Name already exists in the folder'};
       }
     }
@@ -142,7 +142,7 @@ class NoteAddForm extends Component {
 
     const folderOptions = this.context.folders.map( (folder, i) => 
       <option value={folder.id} key={i}>
-        {folder.name}
+        {folder.folderName}
       </option>
     );
 
@@ -158,7 +158,7 @@ class NoteAddForm extends Component {
               className='formSelect'
               defaultValue = {this.state.noteFolder.value}
               aria-label="Select a folder"
-							aria-required="true"
+              aria-required="true"
               onChange={e => this.updateNoteFolder(e.target.value)}
             >
               <option value=''>Folder... </option>

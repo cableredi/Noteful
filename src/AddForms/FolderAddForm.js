@@ -37,7 +37,7 @@ class FolderAddForm extends Component {
         'content-type': 'application/json'
       },
       body: JSON.stringify({
-        name: this.state.folderName.value
+        folderName: this.state.folderName.value
       })
     })
       .then(response => {
@@ -63,7 +63,7 @@ class FolderAddForm extends Component {
       return {error: true, message:'Folder Name must be at least 3 characters long'};
     } else if (name.match(/[^a-zA-Z0-9 ]/)) {
       return {error: true, message:'Folder Name can only include Alphanumeric letters'};
-    } else if ( this.context.folders.find(folder => folder.name.toLowerCase() === name.toLowerCase()) ) {
+    } else if ( this.context.folders.find(folder => folder.folderName.toLowerCase() === name.toLowerCase()) ) {
       return {error: true, message:`${name} already exists`};
     }
 
@@ -91,10 +91,11 @@ class FolderAddForm extends Component {
             id='folderName'
             defaultValue = {this.state.folderName.value}
             aria-label="New Folder Name"
-						aria-required="true"
+            aria-required="true"
             onChange={e => this.updateFolderName(e.target.value)}
           />
           {this.state.folderName.touched && <ValidateError message={folderNameError.message} />}
+          
           <div className='submitButtons'>
             <button
               type='submit'

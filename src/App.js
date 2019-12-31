@@ -132,7 +132,7 @@ class App extends Component {
                     <>
                       <FolderList folders={this.state.folders} />
                       <NotesList 
-                        notes={this.state.notes.filter(note => note.folderId === routeProps.match.params.folderId)} 
+                        notes={this.state.notes.filter(note => parseInt(note.folderId) === parseInt(routeProps.match.params.folderId))} 
                       />
                     </>
                   }

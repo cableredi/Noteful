@@ -5,12 +5,11 @@ import NoteSummary from '../NoteSummary/NoteSummary'
 import AddButton from '../AddForms/AddButton';
 
 export default function NotesList(props) {
-
   const notesItems = props.notes.map( (note) => 
     <NoteSummary
       id={note.id}
       key={note.id}
-      name={note.name}
+      name={note.noteName}
       modified={note.modified}
     />
   )

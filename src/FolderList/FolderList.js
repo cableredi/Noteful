@@ -18,7 +18,7 @@ export default class FolderList extends Component {
                 to={`/folder/${folder.id}`}
                 isActive={isActive.bind(this, `/folder/${folder.id}`)}
               >
-                {folder.name}
+                {folder.folderName}
               </NavLink>
             </li>
           )
