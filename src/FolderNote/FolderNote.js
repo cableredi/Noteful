@@ -2,6 +2,8 @@ import React from 'react';
 import PropTypes from 'prop-types';
 
 export default function FolderNote(props) {
+  console.log('Foldernote')
+  console.log(props)
 
   return(
     <section className='App_FolderList'>
