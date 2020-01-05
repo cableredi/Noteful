@@ -55,8 +55,14 @@ class App extends Component {
 
   /* get folder from noteId */
   getFolder(notesId) {
-    const gotNote =  this.state.notes.find(note => note.id === notesId);
-    return this.state.folders.find(folder => folder.id === gotNote.folderId);
+    const gotNote =  this.state.notes.find(note => parseInt(note.id) === parseInt(notesId));
+console.log('main App')
+console.log('gotnote')
+console.log(gotNote)
+console.log('folders')
+console.log(this.state.folders)
+//console.log('gotnote folderid: ' + gotNote.folderId)
+    //return this.state.folders.find(folder => folder.id === gotNote.folderId);
   } 
 
   /* fetch API => read */
@@ -146,7 +152,7 @@ class App extends Component {
                   render = { (routeProps) =>
                     <>
                       <FolderNote 
-                        folder={ this.getFolder(routeProps.match.params.NoteId) } 
+                        folder={ this.getFolder(routeProps.match.params.NoteId) }
                         {...routeProps}
                       />
                       <Note 

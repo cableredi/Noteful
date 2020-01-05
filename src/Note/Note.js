@@ -3,6 +3,8 @@ import PropTypes from 'prop-types';
 import NoteSummary from '../NoteSummary/NoteSummary'
 
 export default function Note(props) {
+console.log('Note Route')
+console.log(props)
   if (!props.notes) {
     return null;
   }
