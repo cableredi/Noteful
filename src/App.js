@@ -55,14 +55,18 @@ class App extends Component {
 
   /* get folder from noteId */
   getFolder(notesId) {
-    const gotNote =  this.state.notes.find(note => parseInt(note.id) === parseInt(notesId));
+    const gotNote =  this.state.notes.find(note => note.id == notesId);
 console.log('main App')
+console.log('notesId: ' + notesId)
+console.log('this.state.notes')
+console.log(this.state.notes)
 console.log('gotnote')
 console.log(gotNote)
 console.log('folders')
 console.log(this.state.folders)
-//console.log('gotnote folderid: ' + gotNote.folderId)
-    //return this.state.folders.find(folder => folder.id === gotNote.folderId);
+console.log('gotnote folderid: ' + gotNote.folderId)
+console.log(this.state.folders.find(folder => folder.id === gotNote.folderId))
+    return this.state.folders.find(folder => folder.id === gotNote.folderId);
   } 
 
   /* fetch API => read */
@@ -138,7 +142,7 @@ console.log(this.state.folders)
                     <>
                       <FolderList folders={this.state.folders} />
                       <NotesList 
-                        notes={this.state.notes.filter(note => parseInt(note.folderId) === parseInt(routeProps.match.params.folderId))} 
+                        notes={this.state.notes.filter(note => note.folderId == routeProps.match.params.folderId)} 
                       />
                     </>
                   }
@@ -156,7 +160,7 @@ console.log(this.state.folders)
                         {...routeProps}
                       />
                       <Note 
-                        notes={this.state.notes.find(note => note.id === routeProps.match.params.NoteId)}
+                        notes={this.state.notes.find(note => Number(note.id) === Number(routeProps.match.params.NoteId))}
                       />
                     </>
                   }

@@ -3,8 +3,6 @@ import PropTypes from 'prop-types';
 import NoteSummary from '../NoteSummary/NoteSummary'
 
 export default function Note(props) {
-console.log('Note Route')
-console.log(props)
   if (!props.notes) {
     return null;
   }
@@ -14,7 +12,7 @@ console.log(props)
       <div className='Note_note'>
         <NoteSummary
           id={props.notes.id}
-          name={props.notes.name}
+          name={props.notes.noteName}
           modified={props.notes.modified}
         />
         <div className='Note_content'>{props.notes.content}</div>
